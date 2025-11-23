@@ -106,9 +106,18 @@ const App: React.FC = () => {
     }
   };
 
+  const getChineseRiskLevel = (level: RiskLevel) => {
+    switch (level) {
+      case RiskLevel.SAFE: return '安全';
+      case RiskLevel.SUSPICIOUS: return '可疑';
+      case RiskLevel.DANGEROUS: return '高风险';
+      case RiskLevel.CRITICAL: return '极度危险';
+      default: return '未知';
+    }
+  };
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    // You could add a toast here
   };
 
   const handleDownloadPoster = async () => {
@@ -343,28 +352,28 @@ const App: React.FC = () => {
                   </div>
                   
                   <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
-                    <div className="w-40 md:w-48 flex-shrink-0">
+                    <div className="w-full md:w-48 flex-shrink-0">
                       <AnalysisChart score={result.riskScore} level={result.riskLevel} />
                     </div>
-                    <div className="flex-1 text-center md:text-left">
-                      <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+                    <div className="flex-1 text-center md:text-left mt-4 md:mt-0">
+                      <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start gap-2 mb-2">
                         <h3 className="text-xl font-bold text-slate-200">综合风险评估</h3>
                         <span className={`px-3 py-1 rounded-full text-xs font-bold border ${
                           result.riskLevel === RiskLevel.SAFE ? 'bg-green-500/20 border-green-500/30 text-green-400' :
                           result.riskLevel === RiskLevel.SUSPICIOUS ? 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400' :
                           'bg-red-500/20 border-red-500/30 text-red-400'
                         }`}>
-                          {result.riskLevel}
+                          {getChineseRiskLevel(result.riskLevel)}
                         </span>
                       </div>
-                      <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                      <p className="text-slate-300 text-sm leading-relaxed mb-4 max-w-md mx-auto md:mx-0">
                         {result.summary}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Generate Poster Button */}
+                {/* Generate Poster Button - Main Action */}
                 <div className="w-full">
                   <button 
                     onClick={() => setShowPoster(true)}
@@ -474,55 +483,22 @@ const App: React.FC = () => {
                      </div>
                    )}
 
-                   {/* Wake Up Call / Scam Alert Message (Poster Style) - Clickable Trigger */}
+                   {/* Static Scam Alert Display */}
                    {result.scamAlertMessage && (
-                     <div className="mt-8">
-                       <h4 className="flex items-center gap-2 text-red-400 font-bold mb-4">
-                          <i className="fa-solid fa-file-image"></i> 劝退图生成 (点击下方卡片查看/下载)
-                       </h4>
-                       <div 
-                        onClick={() => setShowPoster(true)}
-                        className="bg-[#1a0f0f] relative overflow-hidden rounded-xl border-4 border-red-600 p-6 md:p-8 text-center shadow-2xl group cursor-pointer transition-transform hover:scale-[1.01]"
-                        title="点击查看完整海报并下载"
-                       >
-                          {/* Background effects */}
-                          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-600 via-transparent to-red-600 animate-pulse"></div>
-                          <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-red-600 via-transparent to-red-600 animate-pulse"></div>
-                          <div className="absolute -right-12 -top-12 opacity-10 pointer-events-none">
-                             <i className="fa-solid fa-handcuffs text-[180px] text-red-500"></i>
-                          </div>
-
-                          {/* Content */}
-                          <div className="relative z-10 flex flex-col items-center">
-                             <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-red-600/50 group-hover:animate-bounce transition-all">
-                                <i className="fa-solid fa-download text-2xl text-white font-black"></i>
-                             </div>
-                             
-                             <h2 className="text-2xl md:text-4xl font-black text-white mb-2 tracking-wider">
-                               SCAM ALERT
-                             </h2>
-                             <div className="bg-red-600 text-white px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] mb-6 rounded-full">
-                               高危诈骗预警 · 点击下载
-                             </div>
-
-                             <div className="w-full h-px bg-gradient-to-r from-transparent via-red-800 to-transparent mb-6"></div>
-
-                             <p className="text-base md:text-xl text-red-100 font-bold leading-relaxed whitespace-pre-wrap font-sans line-clamp-4">
-                               {result.scamAlertMessage}
-                             </p>
-                             
-                             <div className="mt-4 text-red-400 text-sm font-medium animate-pulse">
-                               [ 点击生成完整长图 ]
-                             </div>
-
-                             <div className="w-full h-px bg-gradient-to-r from-transparent via-red-800 to-transparent my-6"></div>
-
-                             <div className="flex items-center gap-2 text-slate-500 text-sm font-mono">
-                               <i className="fa-solid fa-shield-cat"></i>
-                               Generated by ScamGuard AI
-                             </div>
-                          </div>
+                     <div className="mt-4 bg-[#1a0f0f] rounded-xl border border-red-600/50 p-5 md:p-6 text-center shadow-xl">
+                       <div className="flex items-center justify-center gap-2 text-red-500 font-bold mb-3">
+                          <i className="fa-solid fa-triangle-exclamation animate-pulse"></i>
+                          <span>极度危险预警</span>
                        </div>
+                       <p className="text-base text-slate-200 leading-relaxed whitespace-pre-wrap mb-4 border-l-4 border-red-600 pl-4 text-left bg-red-900/10 py-2">
+                          {result.scamAlertMessage.split('\n').slice(0, 6).join('\n')}...
+                       </p>
+                       <button 
+                        onClick={() => setShowPoster(true)}
+                        className="text-sm text-blue-400 hover:text-blue-300 underline"
+                       >
+                         查看完整警示信息并生成海报 &rarr;
+                       </button>
                      </div>
                    )}
 
@@ -551,139 +527,135 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* Warning Poster Modal (Long Image Format) */}
-      {/* Optimized for both mobile (scrollable) and desktop (centered) */}
+      {/* Warning Poster Modal - Improved Layout */}
       {showPoster && result && (
-        <div 
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md overflow-y-auto" 
-          onClick={() => setShowPoster(false)}
-        >
-          {/* Inner container to center content but allow scrolling if taller than viewport */}
-          <div className="min-h-full flex items-center justify-center p-4 py-8"> 
-            
-            <div className="relative w-full max-w-[380px] md:max-w-md flex flex-col" onClick={e => e.stopPropagation()}>
-              
-              {/* Controls Panel - Sticky/Floating */}
-              <div className="flex justify-between items-center mb-4 px-1 sticky top-0 z-50">
-                 <h3 className="text-white font-bold text-lg drop-shadow-md">预警海报</h3>
-                 <div className="flex gap-2">
-                    <button 
-                      onClick={(e) => { e.stopPropagation(); handleDownloadPoster(); }}
-                      disabled={isSaving}
-                      className="bg-blue-600 hover:bg-blue-500 text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 transition-colors shadow-lg"
-                    >
-                      {isSaving ? (
-                        <><i className="fa-solid fa-circle-notch fa-spin"></i> 保存中...</>
-                      ) : (
-                        <><i className="fa-solid fa-download"></i> 保存图片</>
-                      )}
-                    </button>
-                    <button 
-                      onClick={() => setShowPoster(false)}
-                      className="bg-slate-700 hover:bg-slate-600 text-white text-xs px-4 py-2 rounded-full shadow-lg"
-                    >
-                      关闭
-                    </button>
-                 </div>
-              </div>
-
-              {/* The Poster Content to Capture */}
-              <div 
-                id="poster-content"
-                className="bg-[#1a0f0f] border-y-8 md:border-8 border-red-600 overflow-hidden relative shadow-2xl flex flex-col md:rounded-2xl shrink-0" 
-              >
-                {/* Header */}
-                <div className="bg-red-600 p-6 md:p-8 text-center relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                  <div className="relative z-10">
-                    <div className="w-16 h-16 bg-black/30 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/20">
-                        <i className="fa-solid fa-land-mine-on text-3xl text-white"></i>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-wider mb-1">
-                      高危诈骗预警
-                    </h2>
-                    <p className="text-red-100 font-bold tracking-widest text-xs uppercase opacity-90">
-                      ScamGuard AI Intelligent Interception
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-6 md:p-8 space-y-6 flex-1 bg-gradient-to-b from-[#1a0f0f] to-[#0f0505]">
-                  
-                  {/* 1. Risk Score Section */}
-                  <div className="text-center relative">
-                      <div className="inline-block px-3 py-1 rounded border border-red-500/30 bg-red-900/20 text-red-500 font-mono text-[10px] tracking-widest mb-2">
-                        RISK ANALYSIS REPORT
-                      </div>
-                      <div className="flex items-center justify-center gap-1">
-                        <span className="text-6xl font-black text-white">{result.riskScore}</span>
-                        <span className="text-xl text-slate-500 font-medium self-end mb-2">/100</span>
-                      </div>
-                      <div className="text-2xl font-black text-red-500 tracking-[0.2em] uppercase mt-1 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
-                        {result.riskLevel}
-                      </div>
-                  </div>
-
-                  <div className="h-px w-full bg-gradient-to-r from-transparent via-red-900 to-transparent opacity-50"></div>
-
-                  {/* 2. Rational Analysis (The "Wake Up" Part) */}
-                  <div className="space-y-4">
-                      <div>
-                        <h3 className="text-red-500 text-xs font-black uppercase tracking-widest mb-2 flex items-center gap-2">
-                          <i className="fa-solid fa-brain"></i> AI 理智分析
-                        </h3>
-                        <p className="text-white text-lg font-bold leading-relaxed">
-                          "{result.scammerMotive}"
-                        </p>
-                      </div>
-
-                      <div className="bg-red-500/5 border-l-4 border-red-500 pl-4 py-2">
-                        <h4 className="text-slate-400 text-xs font-bold uppercase mb-1">即将发生的后果</h4>
-                        <p className="text-slate-200 text-sm leading-relaxed">
-                          {result.expectedOutcome}
-                        </p>
-                      </div>
-                  </div>
-
-                  {/* 3. Key Red Flags */}
-                  <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-800">
-                      <h3 className="text-slate-500 text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <i className="fa-solid fa-magnifying-glass"></i> 关键疑点 (Key Evidence)
-                      </h3>
-                      <ul className="space-y-3">
-                        {result.redFlags.slice(0, 3).map((flag, i) => (
-                          <li key={i} className="text-slate-300 text-sm flex items-start gap-3 font-medium">
-                            <i className="fa-solid fa-xmark text-red-500 mt-0.5 text-lg"></i>
-                            <span className="leading-snug">{flag}</span>
-                          </li>
-                        ))}
-                      </ul>
-                  </div>
-                  
-                  {/* 4. Action */}
-                  <div className="bg-red-600 rounded-xl p-5 text-center shadow-lg shadow-red-900/50 border border-red-400">
-                      <p className="text-red-100 font-bold text-xs uppercase tracking-widest mb-1">EXPERT ADVICE</p>
-                      <p className="text-white font-black text-xl md:text-2xl">
-                        <i className="fa-solid fa-hand"></i> 立即停止转账！
-                      </p>
-                  </div>
-
-                </div>
-
-                {/* Footer */}
-                <div className="bg-black p-4 text-center border-t border-slate-800 relative z-10">
-                  <p className="text-slate-500 text-xs font-mono mb-1">Generated by ScamGuard AI</p>
-                  <p className="text-slate-600 text-[10px]">请立即截图保存并转发给当事人</p>
-                </div>
-              </div>
-
-              {/* Mobile Tip */}
-              <p className="text-slate-500 text-xs text-center mt-4 md:hidden">
-                如果保存失败，请直接截图屏幕
-              </p>
-
-            </div>
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col h-full">
+          
+          {/* Fixed Header Actions */}
+          <div className="flex-none flex justify-between items-center p-4 bg-slate-900/90 border-b border-slate-800 z-50">
+             <h3 className="text-white font-bold text-lg flex items-center gap-2">
+               <i className="fa-solid fa-circle-exclamation text-red-500"></i>
+               劝退海报预览
+             </h3>
+             <div className="flex gap-3">
+                <button 
+                  onClick={handleDownloadPoster}
+                  disabled={isSaving}
+                  className="bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors shadow-lg"
+                >
+                  {isSaving ? (
+                    <><i className="fa-solid fa-circle-notch fa-spin"></i> 保存中...</>
+                  ) : (
+                    <><i className="fa-solid fa-download"></i> 保存图片</>
+                  )}
+                </button>
+                <button 
+                  onClick={() => setShowPoster(false)}
+                  className="bg-slate-700 hover:bg-slate-600 text-white text-xs md:text-sm px-4 py-2 rounded-full shadow-lg"
+                >
+                  关闭
+                </button>
+             </div>
           </div>
+
+          {/* Scrollable Content Body */}
+          <div className="flex-1 overflow-y-auto p-4 flex justify-center bg-black/50 w-full">
+             {/* Poster Content Wrapper 
+                - Removed overflow-hidden to allow content to grow naturally
+                - Removed fixed heights to prevent cutting off
+             */}
+             <div 
+               id="poster-content"
+               className="bg-[#1a0f0f] border-y-8 md:border-8 border-red-600 relative shadow-2xl flex flex-col md:rounded-2xl shrink-0 w-full max-w-[375px] md:max-w-[400px] h-fit" 
+             >
+               {/* Header */}
+               <div className="bg-red-600 p-6 text-center relative shrink-0">
+                 {/* Solid Red Background for Authority */}
+                 <div className="relative z-10">
+                   <div className="w-14 h-14 bg-black/30 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/20">
+                       <i className="fa-solid fa-land-mine-on text-2xl text-white"></i>
+                   </div>
+                   <h2 className="text-2xl font-black text-white uppercase tracking-wider mb-1">
+                     高危诈骗预警
+                   </h2>
+                   <p className="text-red-100 font-bold tracking-widest text-[10px] uppercase opacity-90">
+                     ScamGuard AI 智能拦截系统
+                   </p>
+                 </div>
+               </div>
+
+               <div className="p-6 space-y-6 bg-[#1a0f0f]">
+                 
+                 {/* 1. Risk Score */}
+                 <div className="text-center relative">
+                     <div className="inline-block px-3 py-1 rounded border border-red-500/30 bg-red-900/20 text-red-500 font-mono text-[10px] tracking-widest mb-2 font-bold">
+                       风险分析报告
+                     </div>
+                     <div className="flex items-center justify-center gap-1">
+                       <span className="text-5xl font-black text-white">{result.riskScore}</span>
+                       <span className="text-lg text-slate-500 font-medium self-end mb-2">/100</span>
+                     </div>
+                     <div className="text-2xl font-black text-red-500 tracking-[0.1em] mt-1">
+                       {getChineseRiskLevel(result.riskLevel)}
+                     </div>
+                 </div>
+
+                 <div className="h-px w-full bg-red-900 opacity-50"></div>
+
+                 {/* 2. Rational Analysis */}
+                 <div className="space-y-4">
+                     <div>
+                       <h3 className="text-red-500 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                         <i className="fa-solid fa-brain"></i> AI 理智分析
+                       </h3>
+                       <p className="text-white text-base font-bold leading-relaxed">
+                         "{result.scammerMotive}"
+                       </p>
+                     </div>
+
+                     <div className="bg-red-500/5 border-l-4 border-red-500 pl-4 py-2">
+                       <h4 className="text-slate-400 text-[10px] font-bold uppercase mb-1">即将发生的后果</h4>
+                       <p className="text-slate-200 text-xs leading-relaxed">
+                         {result.expectedOutcome}
+                       </p>
+                     </div>
+                 </div>
+
+                 {/* 3. Key Red Flags - Fixed Visibility & Translation */}
+                 {result.redFlags && result.redFlags.length > 0 && (
+                   <div className="bg-red-900/20 rounded-xl p-5 border border-red-500/40">
+                       <h3 className="text-white text-sm font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                         <i className="fa-solid fa-magnifying-glass text-red-500"></i> 关键疑点
+                       </h3>
+                       <ul className="space-y-3">
+                         {result.redFlags.slice(0, 3).map((flag, i) => (
+                           <li key={i} className="text-white text-sm flex items-start gap-2 font-bold">
+                             <i className="fa-solid fa-xmark text-red-500 mt-1 shrink-0"></i>
+                             <span className="leading-snug">{flag}</span>
+                           </li>
+                         ))}
+                       </ul>
+                   </div>
+                 )}
+                 
+                 {/* 4. Action */}
+                 <div className="bg-red-600 rounded-xl p-5 text-center shadow-lg border border-red-400">
+                     <p className="text-red-100 font-bold text-[10px] uppercase tracking-widest mb-1">专家建议</p>
+                     <p className="text-white font-black text-xl">
+                       <i className="fa-solid fa-hand"></i> 立即停止转账！
+                     </p>
+                 </div>
+
+               </div>
+
+               {/* Footer */}
+               <div className="bg-black p-4 text-center border-t border-slate-800 relative z-10 shrink-0">
+                 <p className="text-slate-500 text-[10px] font-mono mb-1">ScamGuard AI 智能生成</p>
+                 <p className="text-slate-600 text-[10px]">请立即截图保存并转发给当事人</p>
+               </div>
+             </div>
+          </div>
+
         </div>
       )}
 
