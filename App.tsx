@@ -141,13 +141,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-200 selection:bg-blue-500/30">
+    <div className="min-h-screen bg-[#0f172a] text-slate-200 selection:bg-blue-500/30 font-sans">
       
       {/* Header */}
-      <header className="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 shrink-0">
               <i className="fa-solid fa-shield-cat text-white text-xl"></i>
             </div>
             <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
@@ -160,15 +160,15 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-8 space-y-12">
+      <main className="max-w-6xl mx-auto px-4 py-6 md:py-8 space-y-8 md:space-y-12">
         
         {/* Hero / Intro */}
         {!result && (
-          <div className="text-center space-y-4 py-8 animate-fade-in-up">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+          <div className="text-center space-y-4 py-6 md:py-8 animate-fade-in-up">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
               识破谎言，<span className="text-blue-500">守护财产</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            <p className="text-slate-400 max-w-2xl mx-auto text-base md:text-lg px-2">
               遇到可疑的投资机会？陌生的"完美伴侣"？
               <br className="hidden md:block" />
               将聊天记录或主页截图发给我们，AI 为您即时分析潜在风险。
@@ -180,7 +180,7 @@ const App: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div 
-              className="bg-slate-800/50 rounded-2xl border border-slate-700 p-6 shadow-xl transition-colors focus-within:border-blue-500/30"
+              className="bg-slate-800/50 rounded-2xl border border-slate-700 p-4 md:p-6 shadow-xl transition-colors focus-within:border-blue-500/30"
               onPaste={handlePaste}
             >
               <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -190,7 +190,7 @@ const App: React.FC = () => {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="在此粘贴您与对方的聊天记录..."
-                className="w-full h-48 bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 outline-none resize-none placeholder-slate-500 transition-all"
+                className="w-full h-40 md:h-48 bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 outline-none resize-none placeholder-slate-500 transition-all text-sm md:text-base"
               ></textarea>
               
               <div className="mt-4">
@@ -270,7 +270,7 @@ const App: React.FC = () => {
                       onClick={() => handleQuickTry('pig_butchering')}
                       className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-pink-500/50 rounded-xl transition-all group"
                     >
-                       <div className="w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                       <div className="w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                           <i className="fa-solid fa-heart-crack text-pink-400 text-sm"></i>
                        </div>
                        <span className="text-sm font-medium text-slate-300 group-hover:text-white">杀猪盘案例</span>
@@ -280,7 +280,7 @@ const App: React.FC = () => {
                       onClick={() => handleQuickTry('fake_cs')}
                       className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-blue-500/50 rounded-xl transition-all group"
                     >
-                       <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                       <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                           <i className="fa-solid fa-headset text-blue-400 text-sm"></i>
                        </div>
                        <span className="text-sm font-medium text-slate-300 group-hover:text-white">假客服案例</span>
@@ -290,7 +290,7 @@ const App: React.FC = () => {
                       onClick={() => handleQuickTry('brushing')}
                       className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-yellow-500/50 rounded-xl transition-all group"
                     >
-                       <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                       <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                           <i className="fa-solid fa-hand-holding-dollar text-yellow-400 text-sm"></i>
                        </div>
                        <span className="text-sm font-medium text-slate-300 group-hover:text-white">刷单兼职案例</span>
@@ -323,11 +323,11 @@ const App: React.FC = () => {
                 
                 {/* Simulation Dialogue Card (If available) */}
                 {result.generatedConversation && (
-                  <div className="bg-slate-800/50 rounded-xl border border-slate-600 p-5 shadow-lg">
+                  <div className="bg-slate-800/50 rounded-xl border border-slate-600 p-4 md:p-5 shadow-lg">
                     <h4 className="flex items-center gap-2 text-blue-300 font-bold mb-3">
                       <i className="fa-solid fa-robot"></i> AI 模拟诈骗场景
                     </h4>
-                    <div className="bg-slate-900/80 p-4 rounded-lg border border-slate-700 font-mono text-sm text-slate-300 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto custom-scrollbar">
+                    <div className="bg-slate-900/80 p-4 rounded-lg border border-slate-700 font-mono text-xs md:text-sm text-slate-300 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto custom-scrollbar">
                       {result.generatedConversation}
                     </div>
                     <p className="text-xs text-slate-500 mt-2 text-right">
@@ -337,13 +337,13 @@ const App: React.FC = () => {
                 )}
 
                 {/* Score Card */}
-                <div className={`rounded-2xl border p-6 shadow-xl relative overflow-hidden ${getRiskBg(result.riskLevel)}`}>
-                  <div className="absolute top-0 right-0 p-4 opacity-10">
-                    <i className="fa-solid fa-shield-virus text-9xl"></i>
+                <div className={`rounded-2xl border p-4 md:p-6 shadow-xl relative overflow-hidden ${getRiskBg(result.riskLevel)}`}>
+                  <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                    <i className="fa-solid fa-shield-virus text-8xl md:text-9xl"></i>
                   </div>
                   
                   <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
-                    <div className="w-48 flex-shrink-0">
+                    <div className="w-40 md:w-48 flex-shrink-0">
                       <AnalysisChart score={result.riskScore} level={result.riskLevel} />
                     </div>
                     <div className="flex-1 text-center md:text-left">
@@ -370,7 +370,7 @@ const App: React.FC = () => {
                     onClick={() => setShowPoster(true)}
                     className="w-full py-4 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white rounded-xl font-bold shadow-lg shadow-red-900/40 flex items-center justify-center gap-3 transition-all transform hover:scale-[1.01] active:scale-[0.99] group border border-red-500/50"
                   >
-                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
                       <i className="fa-solid fa-file-image text-white text-sm"></i>
                     </div>
                     <span>一键生成【劝退亲友】警示海报 (长图)</span>
@@ -386,7 +386,7 @@ const App: React.FC = () => {
                 <div className="grid grid-cols-1 gap-4">
                    
                    {/* Deep Motive Analysis */}
-                   <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
+                   <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 md:p-5">
                       <h4 className="flex items-center gap-2 text-indigo-400 font-bold mb-4">
                         <i className="fa-solid fa-bullseye"></i> 核心动机与预期后果
                       </h4>
@@ -407,7 +407,7 @@ const App: React.FC = () => {
                    </div>
 
                    {/* Red Flags */}
-                   <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
+                   <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 md:p-5">
                       <h4 className="flex items-center gap-2 text-red-400 font-bold mb-3">
                         <i className="fa-solid fa-flag"></i> 危险信号 (Red Flags)
                       </h4>
@@ -422,7 +422,7 @@ const App: React.FC = () => {
                    </div>
 
                    {/* Psychological Tactics */}
-                   <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
+                   <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 md:p-5">
                       <h4 className="flex items-center gap-2 text-yellow-400 font-bold mb-3">
                         <i className="fa-solid fa-brain"></i> 心理博弈手段
                       </h4>
@@ -437,7 +437,7 @@ const App: React.FC = () => {
 
                    {/* Military Advisor's Kit (Verification Strategies) */}
                    {result.verificationStrategies && result.verificationStrategies.length > 0 && (
-                     <div className="bg-gradient-to-br from-indigo-900/40 to-purple-900/40 rounded-xl border border-indigo-500/40 p-5 shadow-lg shadow-indigo-900/20">
+                     <div className="bg-gradient-to-br from-indigo-900/40 to-purple-900/40 rounded-xl border border-indigo-500/40 p-4 md:p-5 shadow-lg shadow-indigo-900/20">
                         <h4 className="flex items-center gap-2 text-indigo-300 font-bold mb-4">
                           <i className="fa-solid fa-chess-knight"></i> 军师锦囊：反向验证话术
                         </h4>
@@ -458,7 +458,7 @@ const App: React.FC = () => {
                                 title="点击复制话术"
                               >
                                  <i className="fa-regular fa-copy text-slate-500 mt-1 group-hover:text-blue-400"></i>
-                                 <p className="text-white font-mono text-sm leading-relaxed">
+                                 <p className="text-white font-mono text-sm leading-relaxed break-all">
                                    {strategy.reply}
                                  </p>
                               </div>
@@ -482,13 +482,13 @@ const App: React.FC = () => {
                        </h4>
                        <div 
                         onClick={() => setShowPoster(true)}
-                        className="bg-[#1a0f0f] relative overflow-hidden rounded-xl border-4 border-red-600 p-8 text-center shadow-2xl group cursor-pointer transition-transform hover:scale-[1.01]"
+                        className="bg-[#1a0f0f] relative overflow-hidden rounded-xl border-4 border-red-600 p-6 md:p-8 text-center shadow-2xl group cursor-pointer transition-transform hover:scale-[1.01]"
                         title="点击查看完整海报并下载"
                        >
                           {/* Background effects */}
                           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-600 via-transparent to-red-600 animate-pulse"></div>
                           <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-red-600 via-transparent to-red-600 animate-pulse"></div>
-                          <div className="absolute -right-12 -top-12 opacity-10">
+                          <div className="absolute -right-12 -top-12 opacity-10 pointer-events-none">
                              <i className="fa-solid fa-handcuffs text-[180px] text-red-500"></i>
                           </div>
 
@@ -498,7 +498,7 @@ const App: React.FC = () => {
                                 <i className="fa-solid fa-download text-2xl text-white font-black"></i>
                              </div>
                              
-                             <h2 className="text-3xl md:text-4xl font-black text-white mb-2 tracking-wider">
+                             <h2 className="text-2xl md:text-4xl font-black text-white mb-2 tracking-wider">
                                SCAM ALERT
                              </h2>
                              <div className="bg-red-600 text-white px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] mb-6 rounded-full">
@@ -507,7 +507,7 @@ const App: React.FC = () => {
 
                              <div className="w-full h-px bg-gradient-to-r from-transparent via-red-800 to-transparent mb-6"></div>
 
-                             <p className="text-lg md:text-xl text-red-100 font-bold leading-relaxed whitespace-pre-wrap font-sans line-clamp-4">
+                             <p className="text-base md:text-xl text-red-100 font-bold leading-relaxed whitespace-pre-wrap font-sans line-clamp-4">
                                {result.scamAlertMessage}
                              </p>
                              
@@ -552,126 +552,136 @@ const App: React.FC = () => {
       </main>
 
       {/* Warning Poster Modal (Long Image Format) */}
+      {/* Optimized for both mobile (scrollable) and desktop (centered) */}
       {showPoster && result && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-0 md:p-4 overflow-y-auto" 
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md overflow-y-auto" 
           onClick={() => setShowPoster(false)}
         >
-          <div className="relative w-full max-w-sm md:max-w-md flex flex-col max-h-screen">
+          {/* Inner container to center content but allow scrolling if taller than viewport */}
+          <div className="min-h-full flex items-center justify-center p-4 py-8"> 
             
-            {/* Controls outside the image area */}
-            <div className="flex justify-between items-center mb-2 px-2">
-               <h3 className="text-white font-bold">预警海报预览</h3>
-               <div className="flex gap-2">
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); handleDownloadPoster(); }}
-                    disabled={isSaving}
-                    className="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1 transition-colors"
-                  >
-                    {isSaving ? (
-                      <><i className="fa-solid fa-circle-notch fa-spin"></i> 保存中...</>
-                    ) : (
-                      <><i className="fa-solid fa-download"></i> 保存图片</>
-                    )}
-                  </button>
-                  <button 
-                    onClick={() => setShowPoster(false)}
-                    className="bg-slate-700 hover:bg-slate-600 text-white text-xs px-3 py-1.5 rounded-full"
-                  >
-                    关闭
-                  </button>
-               </div>
-            </div>
-
-            {/* The Poster Content to Capture */}
-            <div 
-              id="poster-content"
-              className="bg-[#1a0f0f] border-y-8 md:border-8 border-red-600 overflow-hidden relative shadow-2xl flex flex-col md:rounded-2xl" 
-              onClick={e => e.stopPropagation()}
-            >
-              {/* Header */}
-              <div className="bg-red-600 p-6 md:p-8 text-center relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="relative z-10">
-                  <div className="w-16 h-16 bg-black/30 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/20">
-                      <i className="fa-solid fa-land-mine-on text-3xl text-white"></i>
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-wider mb-1">
-                    高危诈骗预警
-                  </h2>
-                  <p className="text-red-100 font-bold tracking-widest text-xs uppercase opacity-90">
-                    ScamGuard AI Intelligent Interception
-                  </p>
-                </div>
+            <div className="relative w-full max-w-[380px] md:max-w-md flex flex-col" onClick={e => e.stopPropagation()}>
+              
+              {/* Controls Panel - Sticky/Floating */}
+              <div className="flex justify-between items-center mb-4 px-1 sticky top-0 z-50">
+                 <h3 className="text-white font-bold text-lg drop-shadow-md">预警海报</h3>
+                 <div className="flex gap-2">
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); handleDownloadPoster(); }}
+                      disabled={isSaving}
+                      className="bg-blue-600 hover:bg-blue-500 text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 transition-colors shadow-lg"
+                    >
+                      {isSaving ? (
+                        <><i className="fa-solid fa-circle-notch fa-spin"></i> 保存中...</>
+                      ) : (
+                        <><i className="fa-solid fa-download"></i> 保存图片</>
+                      )}
+                    </button>
+                    <button 
+                      onClick={() => setShowPoster(false)}
+                      className="bg-slate-700 hover:bg-slate-600 text-white text-xs px-4 py-2 rounded-full shadow-lg"
+                    >
+                      关闭
+                    </button>
+                 </div>
               </div>
 
-              <div className="p-6 md:p-8 space-y-6 flex-1 bg-gradient-to-b from-[#1a0f0f] to-[#0f0505]">
-                
-                {/* 1. Risk Score Section */}
-                <div className="text-center relative">
-                    <div className="inline-block px-3 py-1 rounded border border-red-500/30 bg-red-900/20 text-red-500 font-mono text-[10px] tracking-widest mb-2">
-                      RISK ANALYSIS REPORT
+              {/* The Poster Content to Capture */}
+              <div 
+                id="poster-content"
+                className="bg-[#1a0f0f] border-y-8 md:border-8 border-red-600 overflow-hidden relative shadow-2xl flex flex-col md:rounded-2xl shrink-0" 
+              >
+                {/* Header */}
+                <div className="bg-red-600 p-6 md:p-8 text-center relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 bg-black/30 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/20">
+                        <i className="fa-solid fa-land-mine-on text-3xl text-white"></i>
                     </div>
-                    <div className="flex items-center justify-center gap-1">
-                      <span className="text-6xl font-black text-white">{result.riskScore}</span>
-                      <span className="text-xl text-slate-500 font-medium self-end mb-2">/100</span>
-                    </div>
-                    <div className="text-2xl font-black text-red-500 tracking-[0.2em] uppercase mt-1 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
-                      {result.riskLevel}
-                    </div>
-                </div>
-
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-red-900 to-transparent opacity-50"></div>
-
-                {/* 2. Rational Analysis (The "Wake Up" Part) */}
-                <div className="space-y-4">
-                    <div>
-                      <h3 className="text-red-500 text-xs font-black uppercase tracking-widest mb-2 flex items-center gap-2">
-                        <i className="fa-solid fa-brain"></i> AI 理智分析
-                      </h3>
-                      <p className="text-white text-lg font-bold leading-relaxed">
-                        "{result.scammerMotive}"
-                      </p>
-                    </div>
-
-                    <div className="bg-red-500/5 border-l-4 border-red-500 pl-4 py-2">
-                      <h4 className="text-slate-400 text-xs font-bold uppercase mb-1">即将发生的后果</h4>
-                      <p className="text-slate-200 text-sm leading-relaxed">
-                        {result.expectedOutcome}
-                      </p>
-                    </div>
-                </div>
-
-                {/* 3. Key Red Flags */}
-                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-800">
-                    <h3 className="text-slate-500 text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2">
-                      <i className="fa-solid fa-magnifying-glass"></i> 关键疑点 (Key Evidence)
-                    </h3>
-                    <ul className="space-y-3">
-                      {result.redFlags.slice(0, 3).map((flag, i) => (
-                        <li key={i} className="text-slate-300 text-sm flex items-start gap-3 font-medium">
-                          <i className="fa-solid fa-xmark text-red-500 mt-0.5 text-lg"></i>
-                          <span className="leading-snug">{flag}</span>
-                        </li>
-                      ))}
-                    </ul>
-                </div>
-                
-                {/* 4. Action */}
-                <div className="bg-red-600 rounded-xl p-5 text-center shadow-lg shadow-red-900/50 border border-red-400">
-                    <p className="text-red-100 font-bold text-xs uppercase tracking-widest mb-1">EXPERT ADVICE</p>
-                    <p className="text-white font-black text-xl md:text-2xl">
-                      <i className="fa-solid fa-hand"></i> 立即停止转账！
+                    <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-wider mb-1">
+                      高危诈骗预警
+                    </h2>
+                    <p className="text-red-100 font-bold tracking-widest text-xs uppercase opacity-90">
+                      ScamGuard AI Intelligent Interception
                     </p>
+                  </div>
                 </div>
 
+                <div className="p-6 md:p-8 space-y-6 flex-1 bg-gradient-to-b from-[#1a0f0f] to-[#0f0505]">
+                  
+                  {/* 1. Risk Score Section */}
+                  <div className="text-center relative">
+                      <div className="inline-block px-3 py-1 rounded border border-red-500/30 bg-red-900/20 text-red-500 font-mono text-[10px] tracking-widest mb-2">
+                        RISK ANALYSIS REPORT
+                      </div>
+                      <div className="flex items-center justify-center gap-1">
+                        <span className="text-6xl font-black text-white">{result.riskScore}</span>
+                        <span className="text-xl text-slate-500 font-medium self-end mb-2">/100</span>
+                      </div>
+                      <div className="text-2xl font-black text-red-500 tracking-[0.2em] uppercase mt-1 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+                        {result.riskLevel}
+                      </div>
+                  </div>
+
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-red-900 to-transparent opacity-50"></div>
+
+                  {/* 2. Rational Analysis (The "Wake Up" Part) */}
+                  <div className="space-y-4">
+                      <div>
+                        <h3 className="text-red-500 text-xs font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                          <i className="fa-solid fa-brain"></i> AI 理智分析
+                        </h3>
+                        <p className="text-white text-lg font-bold leading-relaxed">
+                          "{result.scammerMotive}"
+                        </p>
+                      </div>
+
+                      <div className="bg-red-500/5 border-l-4 border-red-500 pl-4 py-2">
+                        <h4 className="text-slate-400 text-xs font-bold uppercase mb-1">即将发生的后果</h4>
+                        <p className="text-slate-200 text-sm leading-relaxed">
+                          {result.expectedOutcome}
+                        </p>
+                      </div>
+                  </div>
+
+                  {/* 3. Key Red Flags */}
+                  <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-800">
+                      <h3 className="text-slate-500 text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <i className="fa-solid fa-magnifying-glass"></i> 关键疑点 (Key Evidence)
+                      </h3>
+                      <ul className="space-y-3">
+                        {result.redFlags.slice(0, 3).map((flag, i) => (
+                          <li key={i} className="text-slate-300 text-sm flex items-start gap-3 font-medium">
+                            <i className="fa-solid fa-xmark text-red-500 mt-0.5 text-lg"></i>
+                            <span className="leading-snug">{flag}</span>
+                          </li>
+                        ))}
+                      </ul>
+                  </div>
+                  
+                  {/* 4. Action */}
+                  <div className="bg-red-600 rounded-xl p-5 text-center shadow-lg shadow-red-900/50 border border-red-400">
+                      <p className="text-red-100 font-bold text-xs uppercase tracking-widest mb-1">EXPERT ADVICE</p>
+                      <p className="text-white font-black text-xl md:text-2xl">
+                        <i className="fa-solid fa-hand"></i> 立即停止转账！
+                      </p>
+                  </div>
+
+                </div>
+
+                {/* Footer */}
+                <div className="bg-black p-4 text-center border-t border-slate-800 relative z-10">
+                  <p className="text-slate-500 text-xs font-mono mb-1">Generated by ScamGuard AI</p>
+                  <p className="text-slate-600 text-[10px]">请立即截图保存并转发给当事人</p>
+                </div>
               </div>
 
-              {/* Footer */}
-              <div className="bg-black p-4 text-center border-t border-slate-800 relative z-10">
-                <p className="text-slate-500 text-xs font-mono mb-1">Generated by ScamGuard AI</p>
-                <p className="text-slate-600 text-[10px]">请立即截图保存并转发给当事人</p>
-              </div>
+              {/* Mobile Tip */}
+              <p className="text-slate-500 text-xs text-center mt-4 md:hidden">
+                如果保存失败，请直接截图屏幕
+              </p>
+
             </div>
           </div>
         </div>
