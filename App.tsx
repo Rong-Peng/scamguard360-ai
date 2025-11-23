@@ -418,7 +418,7 @@ const App: React.FC = () => {
                    {/* Red Flags */}
                    <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 md:p-5">
                       <h4 className="flex items-center gap-2 text-red-400 font-bold mb-3">
-                        <i className="fa-solid fa-flag"></i> 危险信号 (Red Flags)
+                        <i className="fa-solid fa-flag"></i> 危险信号
                       </h4>
                       <ul className="space-y-2">
                         {result.redFlags.map((flag, i) => (
@@ -483,7 +483,7 @@ const App: React.FC = () => {
                      </div>
                    )}
 
-                   {/* Static Scam Alert Display */}
+                   {/* Static Scam Alert Display (Replaces the redundant card) */}
                    {result.scamAlertMessage && (
                      <div className="mt-4 bg-[#1a0f0f] rounded-xl border border-red-600/50 p-5 md:p-6 text-center shadow-xl">
                        <div className="flex items-center justify-center gap-2 text-red-500 font-bold mb-3">
@@ -560,16 +560,13 @@ const App: React.FC = () => {
 
           {/* Scrollable Content Body */}
           <div className="flex-1 overflow-y-auto p-4 flex justify-center bg-black/50 w-full">
-             {/* Poster Content Wrapper 
-                - Removed overflow-hidden to allow content to grow naturally
-                - Removed fixed heights to prevent cutting off
-             */}
+             {/* Poster Content Wrapper */}
              <div 
                id="poster-content"
-               className="bg-[#1a0f0f] border-y-8 md:border-8 border-red-600 relative shadow-2xl flex flex-col md:rounded-2xl shrink-0 w-full max-w-[375px] md:max-w-[400px] h-fit" 
+               className="bg-[#1a0f0f] border-y-8 md:border-8 border-red-600 overflow-hidden relative shadow-2xl flex flex-col md:rounded-2xl shrink-0 w-full max-w-[375px] md:max-w-[400px]" 
              >
                {/* Header */}
-               <div className="bg-red-600 p-6 text-center relative shrink-0">
+               <div className="bg-red-600 p-6 text-center relative overflow-hidden shrink-0">
                  {/* Solid Red Background for Authority */}
                  <div className="relative z-10">
                    <div className="w-14 h-14 bg-black/30 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/20">
@@ -579,12 +576,12 @@ const App: React.FC = () => {
                      高危诈骗预警
                    </h2>
                    <p className="text-red-100 font-bold tracking-widest text-[10px] uppercase opacity-90">
-                     ScamGuard AI 智能拦截系统
+                     ScamGuard AI 智能反诈系统
                    </p>
                  </div>
                </div>
 
-               <div className="p-6 space-y-6 bg-[#1a0f0f]">
+               <div className="p-6 space-y-6 flex-1 bg-[#1a0f0f]">
                  
                  {/* 1. Risk Score */}
                  <div className="text-center relative">
@@ -621,22 +618,20 @@ const App: React.FC = () => {
                      </div>
                  </div>
 
-                 {/* 3. Key Red Flags - Fixed Visibility & Translation */}
-                 {result.redFlags && result.redFlags.length > 0 && (
-                   <div className="bg-red-900/20 rounded-xl p-5 border border-red-500/40">
-                       <h3 className="text-white text-sm font-black uppercase tracking-widest mb-3 flex items-center gap-2">
-                         <i className="fa-solid fa-magnifying-glass text-red-500"></i> 关键疑点
-                       </h3>
-                       <ul className="space-y-3">
-                         {result.redFlags.slice(0, 3).map((flag, i) => (
-                           <li key={i} className="text-white text-sm flex items-start gap-2 font-bold">
-                             <i className="fa-solid fa-xmark text-red-500 mt-1 shrink-0"></i>
-                             <span className="leading-snug">{flag}</span>
-                           </li>
-                         ))}
-                       </ul>
-                   </div>
-                 )}
+                 {/* 3. Key Red Flags - Fixed Visibility */}
+                 <div className="bg-red-900/10 rounded-xl p-4 border border-red-500/30">
+                     <h3 className="text-red-500 text-sm font-black uppercase tracking-widest mb-3 flex items-center gap-2">
+                       <i className="fa-solid fa-magnifying-glass"></i> 关键疑点
+                     </h3>
+                     <ul className="space-y-3">
+                       {result.redFlags.slice(0, 3).map((flag, i) => (
+                         <li key={i} className="text-white text-sm flex items-start gap-2 font-bold">
+                           <i className="fa-solid fa-xmark text-red-500 mt-1"></i>
+                           <span className="leading-snug">{flag}</span>
+                         </li>
+                       ))}
+                     </ul>
+                 </div>
                  
                  {/* 4. Action */}
                  <div className="bg-red-600 rounded-xl p-5 text-center shadow-lg border border-red-400">
